@@ -585,5 +585,12 @@ $string['viewrevealidentitiesconfirm'] = 'View reveal student identities confirm
 $string['workflowfilter'] = 'Workflow filter';
 $string['xofy'] = '{$a->x} of {$a->y}';
 
+// Added as patch on MWABU fork 23-July 2019 by dc
+$string['hidegradeinfo'] = 'Hide empty descriptions for students and markers.';
+$string['hidegradeinfo_help'] = 'In the grading report - hide the criteria description from students and markers.';
+$string['hidegradecritremarks'] = 'Hide criterion remarks for students and markers.';
+$string['hidegradecritremarks_help'] = 'In the grading report - hide the criteria remarks from students and markers.';
+// End of mwabu customisation
+
 // Deprecated since Moodle 3.2.
 $string['changegradewarning'] = 'This assignment has graded submissions and changing the grade will not automatically re-calculate existing submission grades. You must re-grade all existing submissions, if you wish to change the grade.';

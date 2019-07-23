@@ -165,6 +165,24 @@ function xmldb_assign_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2017061205, 'assign');
     }
 
+
+// Additonal field for TitusLearning plugin amendment - hide fields in grading reports
+if ($oldversion < 2018072300) {
+    // Add a 'gradingduedate' field to the 'assign' table.
+    $table = new xmldb_table('assign');
+    $field = new xmldb_field('hidegradeinfo', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, 0, 'preventsubmissionnotingroup');
+
+    // Conditionally launch add field.
+    if (!$dbman->field_exists($table, $field)) {
+        $dbman->add_field($table, $field);
+    }
+
+    // Assign savepoint reached.
+    upgrade_mod_savepoint(true, 2018072300, 'assign');
+}
+
+// end of additional field definition.
+
     // Automatically generated Moodle v3.4.0 release upgrade line.
     // Put any upgrade step following this.
 

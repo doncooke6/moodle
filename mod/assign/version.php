@@ -25,6 +25,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_assign'; // Full name of the plugin (used for diagnostics).
-$plugin->version  = 2018051400;    // The current module version (Date: YYYYMMDDXX).
-$plugin->requires = 2018050800;    // Requires this Moodle version.
+// Fork for mwabu project  TitusLearning
+// Original version details for plugin version below ..
+//$plugin->version  = 2018051400;    // The current module version (Date: YYYYMMDDXX).
+$plugin->version  = 2019072300;    // The current module version (Date: YYYYMMDDXX).
+
+//$plugin->requires = 2018050800;    // Requires this Moodle version.
+$plugin->requires = 2018051707;    // Requires this Moodle version.
 $plugin->cron     = 60;

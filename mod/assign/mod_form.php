@@ -103,7 +103,6 @@ class mod_assign_mod_form extends moodleform_mod {
         $mform->addElement('checkbox', 'alwaysshowdescription', $name);
         $mform->addHelpButton('alwaysshowdescription', 'alwaysshowdescription', 'assign');
         $mform->disabledIf('alwaysshowdescription', 'allowsubmissionsfromdate[enabled]', 'notchecked');
-
         $assignment->add_all_plugin_settings($mform);
 
         $mform->addElement('header', 'submissionsettings', get_string('submissionsettings', 'assign'));
@@ -208,6 +207,17 @@ class mod_assign_mod_form extends moodleform_mod {
         $mform->addElement('selectyesno', 'markingallocation', $name);
         $mform->addHelpButton('markingallocation', 'markingallocation', 'assign');
         $mform->disabledIf('markingallocation', 'markingworkflow', 'eq', 0);
+
+        // titus learning 23 July dc
+        // mod - Add new activity setting to hide desc from students and markers
+        $name = get_string('hidegradeinfo', 'assign');
+        $mform->addElement('selectyesno', 'hidegradeinfo', $name);
+        $mform->addHelpButton('hidegradeinfo', 'hidegradeinfo', 'assign');
+
+        $name = get_string('hidegradecritremarks', 'assign');
+        $mform->addElement('selectyesno', 'hidegradecritremarks', $name);
+        $mform->addHelpButton('hidegradecritremarks', 'hidegradecritremarks', 'assign');
+        // titus learning end of mod
 
         $this->standard_coursemodule_elements();
         $this->apply_admin_defaults();

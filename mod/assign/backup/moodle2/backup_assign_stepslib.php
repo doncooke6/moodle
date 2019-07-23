@@ -76,6 +76,7 @@ class backup_assign_activity_structure_step extends backup_activity_structure_st
                                                   'duedate',
                                                   'cutoffdate',
                                                   'gradingduedate',
+                                                  'hidegradeinfo',
                                                   'allowsubmissionsfromdate',
                                                   'grade',
                                                   'timemodified',
@@ -91,6 +92,11 @@ class backup_assign_activity_structure_step extends backup_activity_structure_st
                                                   'markingworkflow',
                                                   'markingallocation',
                                                   'preventsubmissionnotingroup'));
+
+// TODO Add backup of the hide grading guide sections switch
+
+
+// TODO End of logic
 
         $userflags = new backup_nested_element('userflags');
 

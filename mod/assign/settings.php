@@ -289,6 +289,30 @@ if ($ADMIN->fulltree) {
     $setting->set_advanced_flag_options(admin_setting_flag::ENABLED, false);
     $setting->set_locked_flag_options(admin_setting_flag::ENABLED, false);
     $settings->add($setting);
+
+
+// Modification for TitusLearning 23-jul-2019  Added now settings
+$name = new lang_string('hidegradeinfo', 'mod_assign');
+$description = new lang_string('hidegradeinfo_help', 'mod_assign');
+$setting = new admin_setting_configcheckbox('assign/hidegradeinfo',
+                                                $name,
+                                                $description,
+                                                0);
+$setting->set_advanced_flag_options(admin_setting_flag::ENABLED, false);
+$setting->set_locked_flag_options(admin_setting_flag::ENABLED, false);
+$settings->add($setting);
+
+$name = new lang_string('hidegradecritremarks', 'mod_assign');
+$description = new lang_string('hidegradecritremarks_help', 'mod_assign');
+$setting = new admin_setting_configcheckbox('assign/hidegradecritremarks',
+                                                $name,
+                                                $description,
+                                                0);
+$setting->set_advanced_flag_options(admin_setting_flag::ENABLED, false);
+$setting->set_locked_flag_options(admin_setting_flag::ENABLED, false);
+$settings->add($setting);
+// End of modification
+
 }
 
 $ADMIN->add('modassignfolder', $settings);
