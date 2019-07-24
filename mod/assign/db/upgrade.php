@@ -171,12 +171,17 @@ if ($oldversion < 2018072300) {
     // Add a 'gradingduedate' field to the 'assign' table.
     $table = new xmldb_table('assign');
     $field = new xmldb_field('hidegradeinfo', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, 0, 'preventsubmissionnotingroup');
+    $field2 = new xmldb_field('hidegradecritremarks', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, 0, 'hidegradeinfo');
 
     // Conditionally launch add field.
     if (!$dbman->field_exists($table, $field)) {
         $dbman->add_field($table, $field);
     }
 
+    // Conditionally launch add field.
+    if (!$dbman->field_exists($table, $field2)) {
+        $dbman->add_field($table, $field2);
+    }
     // Assign savepoint reached.
     upgrade_mod_savepoint(true, 2018072300, 'assign');
 }
