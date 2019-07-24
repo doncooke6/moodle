@@ -176,6 +176,16 @@ class assign {
      */
     private $mostrecentteamsubmission = null;
 
+
+//Titus 23-jul-2019 Extension of assignment declaration.
+/** @var array of marking workflow states for the current user */
+private $hidegradeinfo = null;
+
+/** @var bool whether to exclude users with inactive enrolment */
+private $hidegradecritremarks = null;
+// End of mod.
+
+
     /**
      * Constructor for the base assign class.
      *
@@ -677,6 +687,12 @@ class assign {
         }
         $update->markingworkflow = $formdata->markingworkflow;
         $update->markingallocation = $formdata->markingallocation;
+
+// TitusLearning two new assignment fields
+        $update->hidegradeinfo = $formdata->hidegradeinfo;
+        $update->hidegradecritremarks = $formdata->hidegradecritremarks;
+// end of modification
+
         if (empty($update->markingworkflow)) { // If marking workflow is disabled, make sure allocation is disabled.
             $update->markingallocation = 0;
         }
@@ -1420,6 +1436,11 @@ class assign {
         if (empty($update->markingworkflow)) { // If marking workflow is disabled, make sure allocation is disabled.
             $update->markingallocation = 0;
         }
+
+        // TitusLearning two new assignment fields
+        $update->hidegradeinfo = $formdata->hidegradeinfo;
+        $update->hidegradecritremarks = $formdata->hidegradecritremarks;
+        // end of modification
 
         $result = $DB->update_record('assign', $update);
         $this->instance = $DB->get_record('assign', array('id'=>$update->id), '*', MUST_EXIST);

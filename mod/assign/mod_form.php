@@ -317,4 +317,15 @@ class mod_assign_mod_form extends moodleform_mod {
         return !empty($data['completionsubmit']);
     }
 
+    public function get_data() {
+    global $DB;
+    $data = parent::get_data();
+
+    if (!empty($data)) {
+        $mform =& $this->_form;
+
+        }
+
+    return $data;
+    }
 }
