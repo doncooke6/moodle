@@ -172,26 +172,25 @@ class gradingform_guide_renderer extends plugin_renderer_base {
         if ($mode == gradingform_guide_controller::DISPLAY_EDIT_FULL ||
             $mode == gradingform_guide_controller::DISPLAY_PREVIEW) {
 
-// TitusLearning modification - check to see if we have a value before entering the headings
-// TODO How do we get the correct assign level flag value for the confirm here
-//if ($description != '' || !$this->assignment->get_instance()-> ) { // Only include the student and teachers
-                                                                   // headings if the  description is populated.
-
+        // TitusLearning modification - check to see if we have a value before entering the headings
+        // TODO How do we get the correct assign level flag value for the confirm here
+        if ($mode == gradingform_guide_controller::DISPLAY_EDIT_FULL ||
+        ( !strip_tags($description) ==  '' )) { // Only include the student and teachers
+                                                // headings if the  description is populated.
             $title .= html_writer::tag('label', get_string('descriptionstudents', 'gradingform_guide'),
-                array('for'=>'{NAME}[criteria][{CRITERION-id}][description]'));
-//} // TitusLearning modification - check to see if we have a value before entering the headings
-
+                 array('for'=>'{NAME}[criteria][{CRITERION-id}][description]'));
             $title .= $description;
+        } // TitusLearning modification - check to see if we have a value before entering the headings
 
-// TitusLearning modification - check to see if we have a value before entering the headings
-// TODO How do we get the correct assign level flag value for the confirm here
-//if ($description != '' || !$this->assignment->get_instance()->hidegradeinfo ) { // Only include the student and teachers headings if the
-                                                                                // headings if the  description is populated.
-            $title .= html_writer::tag('label', get_string('descriptionmarkers', 'gradingform_guide'),
-                array('for'=>'{NAME}[criteria][{CRITERION-id}][descriptionmarkers]'));
-//} // TitusLearning modification - check to see if we have a value before entering the headings
-
-            $title .= $descriptionmarkers;
+        // TitusLearning modification - check to see if we have a value before entering the headings
+        // TODO How do we get the correct assign level flag value for the confirm here
+        if ($mode == gradingform_guide_controller::DISPLAY_EDIT_FULL ||
+        ( !strip_tags($descriptionmarkers) == '')) { // Only include the student and teachers headings if the
+                                                     // headings if the  description is populated.
+           $title .= html_writer::tag('label', get_string('descriptionmarkers', 'gradingform_guide'),
+                 array('for'=>'{NAME}[criteria][{CRITERION-id}][descriptionmarkers]'));
+           $title .= $descriptionmarkers;
+         } // TitusLearning modification - check to see if we have a value before entering the headings
 
 
             $title .=  html_writer::tag('label', get_string('maxscore', 'gradingform_guide'),
