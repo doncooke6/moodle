@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local_smartcare/db" VERSION="20140724" COMMENT="XMLDB file for Moodle local/smartcare"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_smartcare_log" COMMENT="This table saves information about smartcare webservice feed.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Surname for the smartcare user."/>
+        <FIELD NAME="nrc" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="NRC for the smartcare user."/>
+        <FIELD NAME="dob" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="DOB for the smartcare user."/>
+        <FIELD NAME="logtype" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="type of the smartcare log entry."/>
+        <FIELD NAME="logdate" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="date of the smartcare log entry."/>
+        <FIELD NAME="logdescription" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="description text of smartcare log entry."/>
+        <FIELD NAME="logremarks" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="remarks for the smartcare log entry."/>
+        <FIELD NAME="read_status" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="validation status for the smartcare log entry."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Unique ID for this smartcare log message."/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+  </XMLDB>
