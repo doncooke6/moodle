@@ -281,10 +281,12 @@ class gradingform_guide_renderer extends plugin_renderer_base {
                 'class' => 'hidden',
                 'id' => '{NAME}-remarklabel{CRITERION-id}'
             );
-            $remarklabeltext = get_string('criterionremark', 'gradingform_guide', $criterion['shortname']);
-            $remarklabel = html_writer::label($remarklabeltext, $remarkid, false, $remarklabelparams);
 
-            $criteriontemplate .= html_writer::tag('td', $remarklabel . $input . $commentchooser, array('class' => 'remark'));
+// TitusLearning - do not show the remarks section - TODO needs to be based on an assignment toggle.
+      //      $remarklabeltext = get_string('criterionremark', 'gradingform_guide', $criterion['shortname']);
+      //      $remarklabel = html_writer::label($remarklabeltext, $remarkid, false, $remarklabelparams);
+      // $criteriontemplate .= html_writer::tag('td', $remarklabel . $input . $commentchooser, array('class' => 'remark'));
+// TitusLearning End of mod - TODO needs to be based on an assignment toggle.
 
             // Score input and max score.
             $scoreinputparams = array(
