@@ -29,18 +29,18 @@ echo 'local api test ..' ;
 
 // Send test record for addition in the smartcare record log
 $returncode = loc_create_smartcare_log_entry('cooke','12345','01/01/2019',
-                           array( array ('type' => '7', 'date' => '25:34.5', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
-                                  array ('type' => '7', 'date' => '27:30.0', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
-                                  array ('type' => '14', 'date' => '28:09.2', 'description' => 'MERGE', 'remarks' => 'Create Transport DB merge occured.  Current Site: Kashikishi (HMISCode: 4060190)  Start Time: 9/17/2018 1:28:01 PM  End Time: 9/17/2018 1:28:09 PM  Inital Transport Database Patient Count: 0  Final Transport Database Patient Count: 1  Inital Local Facility Database Patient Count: 3939  Application Version #: 4.5.0.6  Transport Database Version #: 5  ')
+                           array( array ('type' => '7', 'date' => '5/24/19', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
+                                  array ('type' => '7', 'date' => '5/24/19', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
+                                  array ('type' => '7', 'date' => '10/10/20', 'description' => 'MERGE', 'remarks' => 'Create Transport DB merge occured.  Current Site: Kashikishi (HMISCode: 4060190)  Start Time: 9/17/2018 1:28:01 PM  End Time: 9/17/2018 1:28:09 PM  Inital Transport Database Patient Count: 0  Final Transport Database Patient Count: 1  Inital Local Facility Database Patient Count: 3939  Application Version #: 4.5.0.6  Transport Database Version #: 5  ')
                                 ) );
 
 echo "Returned  .." . $returncode ;
 
 // Second call should record failed user lookup
 $returncode = loc_create_smartcare_log_entry('DUFFER','12345','01/01/2019',
-                           array( array ('type' => '7', 'date' => '25:34.5', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
-                                  array ('type' => '7', 'date' => '27:30.0', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
-                                  array ('type' => '14', 'date' => '28:09.2', 'description' => 'MERGE', 'remarks' => 'Create Transport DB merge occured.  Current Site: Kashikishi (HMISCode: 4060190)  Start Time: 9/17/2018 1:28:01 PM  End Time: 9/17/2018 1:28:09 PM  Inital Transport Database Patient Count: 0  Final Transport Database Patient Count: 1  Inital Local Facility Database Patient Count: 3939  Application Version #: 4.5.0.6  Transport Database Version #: 5  ')
+                           array( array ('type' => '7', 'date' => '5/24/19', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
+                                  array ('type' => '7', 'date' => '5/24/19', 'description' => 'USER LOGIN', 'remarks' => 'NULL'),
+                                  array ('type' => '14', 'date' => '10/10/2019', 'description' => 'MERGE', 'remarks' => 'Create Transport DB merge occured.  Current Site: Kashikishi (HMISCode: 4060190)  Start Time: 9/17/2018 1:28:01 PM  End Time: 9/17/2018 1:28:09 PM  Inital Transport Database Patient Count: 0  Final Transport Database Patient Count: 1  Inital Local Facility Database Patient Count: 3939  Application Version #: 4.5.0.6  Transport Database Version #: 5  ')
                                 ) );
 
 echo "Returned  .." . $returncode ;

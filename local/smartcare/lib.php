@@ -90,6 +90,18 @@ function get_loglines($showfilter = 'All', $filterfrom = '', $filterto = '') {
       $s .= ' AND read_status = "Error"  ';
    }
 
+
+   if ($filterfrom !== '') {
+      $s .= ' AND UNIX_TIMESTAMP(STR_TO_DATE(logdate, "%m/%d/%y")) > :fromdate ';
+      $parms['fromdate'] = $filterfrom;
+
+   }
+
+   if ($filterto !== '') {
+      $s .= ' AND UNIX_TIMESTAMP(STR_TO_DATE(logdate, "%m/%d/%y")) < :todate ';
+      $parms['todate'] = $filterto;
+   }
+
     if ($rs = $DB->get_records_sql($s, $parms)) {
       return ($rs);
     }
