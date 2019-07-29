@@ -36,17 +36,31 @@ class local_smartcare_external extends external_api {
   public static function create_smartcare_log_entry_parameters() {
       return new external_function_parameters(
           array (
-              'surname' => new external_value,
-              'nrc' => new external_value,
-              'dob' => new external_value,
+              'surname' => new external_value(
+                  PARAM_ALPHANUMEXT,
+                  'log surname'),
+              'nrc' => new external_value(
+                  PARAM_ALPHANUMEXT,
+                  'log nrc'),
+              'dob' => new external_value(
+                  PARAM_ALPHANUMEXT,
+                  'log user dob'),
               'actions' => new external_multiple_structure(
                 new external_single_structure(
                   array(
-                      'type' =>  new external_value,
-                      'date' =>  new external_value,
-                      'description' =>  new external_value,
-                      'remarks' =>  new external_value,
-                    ) ) ) );
+                      'type' =>  new external_value(
+                          PARAM_ALPHANUMEXT,
+                          'log entry type'),
+                      'date' =>  new external_value(
+                          PARAM_ALPHANUMEXT,
+                          'log entry date'),
+                      'description' =>  new external_value(
+                          PARAM_ALPHANUMEXT,
+                          'log entry description'),
+                      'remarks' =>  new external_value(
+                          PARAM_ALPHANUMEXT,
+                          'log entry remarks'),
+                    ) ) ) ) );
 }
 
 
@@ -62,8 +76,8 @@ class local_smartcare_external extends external_api {
 //                                  array ('type' => '14', 'date' => '28:09.2', 'description' => 'MERGE', 'remarks' => 'Create Transport DB merge occured.  Current Site: Kashikishi (HMISCode: 4060190)  Start Time: 9/17/2018 1:28:01 PM  End Time: 9/17/2018 1:28:09 PM  Inital Transport Database Patient Count: 0  Final Transport Database Patient Count: 1  Inital Local Facility Database Patient Count: 3939  Application Version #: 4.5.0.6  Transport Database Version #: 5  ')
 //                                ) );
 
-loc_create_smartcare_log_entry($smartcare_surname, $smartcare_nrc, $smartcare_dob, $smartcare_actions)
-
+     loc_create_smartcare_log_entry($smartcare_surname, $smartcare_nrc, $smartcare_dob, $smartcare_actions);
+//{
 // // TODO  code below moved to local library for
 //    // TODO Use the offset from the correct profile custom field for nrc
 //    $nrc_offset = 1; // TODO set to the real offset value or work it out based on the field name
@@ -137,6 +151,6 @@ loc_create_smartcare_log_entry($smartcare_surname, $smartcare_nrc, $smartcare_do
      */
      //TODO - fix to return a boolean value
     public static function create_smartcare_log_entry_returns() {
-        return  new external_value;
+        return new external_warnings();
     }
 }

@@ -13,17 +13,21 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * Version information
+ * Capability definitions for this module.
  *
- * @package    local_smartcare
- * @copyright 2019 TitusLearning {@link http://www.tituslearning.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   mod_assign
+ * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$functions = array(
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'local_smartcare'; // Full name of the plugin (used for diagnostics).
-$plugin->version  = 2019170703;    // The current module version (Date: YYYYMMDDXX).
-$plugin->requires = 2015111000;    // Requires this Moodle version.
-$plugin->cron     = 60;
+        'local_smartcare_create_smartcare_log_entry' => array(
+            'classname'     => 'local_smartcare_external',
+            'methodname'    => 'create_smartcare_log_entry',
+            'classpath'     => 'local/smartcare/externallib.php',
+            'description'   => 'WS for smartcare integration.',
+            'type'          => 'write',
+            'capabilities'  => 'local/smartcare:admin'
+        ) );
