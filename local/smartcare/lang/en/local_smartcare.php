@@ -31,3 +31,12 @@ $string['status_success'] = 'Success';
 $string['status_failure'] = 'Error';
 $string['smartcare_report_link'] = 'MWABU Smartcare Logs';
 $string['smartcare:admin'] = 'Administer Smartcare Logs';
+$string['successstatus'] = 'Include :';
+$string['all'] = 'All';
+$string['success'] = 'Success';
+$string['error'] = 'Errors';
+$string['producereport'] = 'Run Report';
+
+$string['formatscreen'] = 'Screen';
+$string['formatcsv'] = 'CSV';
+$string['exportformat'] = 'Format';

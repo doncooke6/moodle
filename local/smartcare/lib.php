@@ -74,22 +74,21 @@ function get_loglines($showfilter = 'All', $filterfrom = '', $filterto = '') {
        $s .= ' WHERE ';
 
   // TODO Add the filters based on the chosen filters
-  // Just for the current user if no admin user
+  // Just for the current user if not admin user
   if (!is_siteadmin() ) {
-       $s .= 'userid = :userid AND';
+       $s .= 'userid = :userid ';
        $parms = array('userid' => $USER->id);
   } else {
-       $parm = array();
+       $s .= ' 1 ';
+       $parms = array();
   }
 
    if ($showfilter  == "Success") {
-      $s .= ' read_status = "Success"';
+      $s .= ' AND read_status = "Success"';
 
    } elseif ($showfilter  == "Error") {
-      $s .= ' read_status = "Error"  ';
+      $s .= ' AND read_status = "Error"  ';
    }
-
-$parms = array('userid' => $USER->id);
 
     if ($rs = $DB->get_records_sql($s, $parms)) {
       return ($rs);

@@ -25,7 +25,9 @@
  defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
  require_once(__DIR__.'/../../config.php');
  require_once($CFG->libdir.'/formslib.php');
- require_once($CFG->dirroot . '/local/smartcare/lib.php');
+ require_once($CFG->dirroot . '/local/smartcare/locallib.php');
+ require_once($CFG->dirroot . '/local/smartcare/reportlib.php');
+
 
  require_login();
 
@@ -46,15 +48,24 @@ class local_smartcare_admin_form extends moodleform {
         // Added so we can push the page refresh on course selection for quiz repopulation.
         // Get data dynamically based on the selection from the dropdown.
         $mform = $this->_form;
-        $mform->addElement('header', 'badgeissuer', get_string('admin_heading', 'local_smartcare'));
-        $courses = get_smartcarecourses();
-        $select = $mform->addElement('select', 'course', get_string('selectcourse', 'local_extend_badges'), $courses);
-        $select->setMultiple(false);
-        $quizes = get_smartcarequizzes();
-        $select = $mform->addElement('select', 'quiz', get_string('selectquiz', 'local_extend_badges'), $quizes);
+        $mform->addElement('header', 'smartcareadminlog', get_string('admin_heading', 'local_smartcare'));
+        $logtype = get_smartcare_success();
+        $select = $mform->addElement('select', 'successstatus', get_string('successstatus', 'local_smartcare'), $logtype);
         $select->setMultiple(false);
 
-        $this->add_action_buttons();
+        $mform->addElement('date_selector', 'logstart', get_string('from'));
+        $mform->addElement('date_selector', 'logfinish', get_string('to'));
+
+        $logformat = get_smartcare_format();
+        $select = $mform->addElement('select', 'exportformat', get_string('exportformat', 'local_smartcare'), $logformat);
+        $select->setMultiple(false);
+
+        //normally you use add_action_buttons instead of this code
+        $buttonarray=array();
+        $buttonarray[] = $mform->createElement('submit', 'submitbutton', get_string('producereport', 'local_smartcare'));
+        $buttonarray[] = $mform->createElement('cancel');
+        $mform->addGroup($buttonarray, 'buttonar', '', ' ', false);
+
     }
 
     /**

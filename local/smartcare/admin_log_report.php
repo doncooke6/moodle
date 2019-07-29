@@ -49,10 +49,23 @@ if ($mform->is_cancelled()) {
 
 } else if ($fromform = $mform->get_data()) {
     // In this case you process validated data. $mform->get_data() returns data posted in form.
-    //   add_extend_record($fromform->course, $fromform->quiz, $fromform->criteriagrade, $fromform->badgetobeissued);
-    //   header("Location: " . $CFG->wwwroot.'/local/extend_badges/index.php');
-
     // TODO Generate Smartcare Admin Log
+
+if ($fromform->successstatus == 0) {
+  $showfilter = 'All';
+} elseif  ($fromform->successstatus == 1) {
+   $showfilter = 'Success';
+} elseif  ($fromform->successstatus == 2) {
+   $showfilter = 'Error';
+}
+
+if ($fromform->exportformat == 0) {
+    generate_admin_report('screen',$showfilter, $fromform->logstart, $fromform->logfinish);
+  } else {
+    generate_admin_report('csv', $showfilter, $fromform->logstart, $fromform->logfinish);
+  }
+
+
 } else {
     // This branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed.
     // Or on the first display of the form.

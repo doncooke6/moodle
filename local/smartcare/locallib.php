@@ -63,3 +63,18 @@ function loc_create_smartcare_log_entry($smartcare_surname, $smartcare_nrc, $sma
 
           return $error_status;
 }
+
+function get_smartcare_success() {
+  $l = array();
+  $l[] = get_string('all', 'local_smartcare');
+  $l[] = get_string('success', 'local_smartcare');
+  $l[] = get_string('error', 'local_smartcare');
+  return $l;
+}
+
+function get_smartcare_format() {
+  $l = array();
+  $l[] = get_string('formatscreen', 'local_smartcare');
+  $l[] = get_string('formatcsv', 'local_smartcare');
+  return $l;
+}
