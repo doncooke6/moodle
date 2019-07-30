@@ -42,9 +42,17 @@ $PAGE->set_url(new moodle_url('/grade/grading/form/guide/edit.php', array('areai
 $PAGE->set_title(get_string('definemarkingguide', 'gradingform_guide'));
 $PAGE->set_heading(get_string('definemarkingguide', 'gradingform_guide'));
 
+// TitusLearing
 $mform = new gradingform_guide_editguide(null, array('areaid' => $areaid, 'context' => $context,
     'allowdraft' => !$controller->has_active_instances()), 'post', '', array('class' => 'gradingform_guide_editform'));
 $data = $controller->get_definition_for_editing(true);
+
+$gradebook_setting = grade_get_assign_gradebook_options($cm);
+
+// TitusLearning - settings from the assign activity
+$mform->hidedesc =  $gradebook_setting->hidedesc;
+$mform->hideremarks = $gradebook_setting->hideremarks;
+// End of mod TitusLearning
 
 $returnurl = optional_param('returnurl', $manager->get_management_url(), PARAM_LOCALURL);
 $data->returnurl = $returnurl;

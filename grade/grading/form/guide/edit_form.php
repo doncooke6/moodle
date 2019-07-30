@@ -38,6 +38,9 @@ MoodleQuickForm::registerElementType('guideeditor', $CFG->dirroot.'/grade/gradin
  */
 class gradingform_guide_editguide extends moodleform {
 
+public $hideheadings = 0;
+public $hideremarks = 0;
+
     /**
      * Form element definition
      */

@@ -46,6 +46,10 @@ class moodlequickform_guideeditor extends HTML_QuickForm_input {
     /** @var string|false Message to display in front of the editor (that there exist grades on this guide being edited) */
     protected $regradeconfirmation = false;
 
+// TitusLearning setting from assign activity
+    public $hidedesc = 0;
+    public $hideremarks = 0;
+// Endofmod  TitusLearning setting from assign activity
     /**
      * Constructor
      *
@@ -105,6 +109,12 @@ class moodlequickform_guideeditor extends HTML_QuickForm_input {
         global $PAGE;
         $html = $this->_getTabs();
         $renderer = $PAGE->get_renderer('gradingform_guide');
+
+        // TitusLearning fix to pass the assign activity settings
+       $renderer->hidedesc = $this->hidedesc;
+       $renderer->hideremarks = $this->hideremarks;
+        // End of mod.
+
         $data = $this->prepare_data(null, $this->wasvalidated);
         if (!$this->_flagFrozen) {
             $mode = gradingform_guide_controller::DISPLAY_EDIT_FULL;

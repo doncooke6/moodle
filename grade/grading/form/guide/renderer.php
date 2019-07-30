@@ -32,6 +32,8 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class gradingform_guide_renderer extends plugin_renderer_base {
+  public $hideheadings;
+  public $hideremarks;
 
     /**
      * This function returns html code for displaying criterion. Depending on $mode it may be the
@@ -175,8 +177,8 @@ class gradingform_guide_renderer extends plugin_renderer_base {
         // TitusLearning modification - check to see if we have a value before entering the headings
         // TODO How do we get the correct assign level flag value for the confirm here
         if ($mode == gradingform_guide_controller::DISPLAY_EDIT_FULL ||
-        ( !strip_tags($description) ==  '' )) { // Only include the student and teachers
-                                                // headings if the  description is populated.
+        ( !strip_tags($description) ==  '' || !$this->hidedesc)) { // Only include the student and teachers
+                                                                   // headings if the  description is populated.
             $title .= html_writer::tag('label', get_string('descriptionstudents', 'gradingform_guide'),
                  array('for'=>'{NAME}[criteria][{CRITERION-id}][description]'));
             $title .= $description;
@@ -185,7 +187,7 @@ class gradingform_guide_renderer extends plugin_renderer_base {
         // TitusLearning modification - check to see if we have a value before entering the headings
         // TODO How do we get the correct assign level flag value for the confirm here
         if ($mode == gradingform_guide_controller::DISPLAY_EDIT_FULL ||
-        ( !strip_tags($descriptionmarkers) == '')) { // Only include the student and teachers headings if the
+        ( !strip_tags($descriptionmarkers) == '' || !$this->hidedesc)) { // Only include the student and teachers headings if the
                                                      // headings if the  description is populated.
            $title .= html_writer::tag('label', get_string('descriptionmarkers', 'gradingform_guide'),
                  array('for'=>'{NAME}[criteria][{CRITERION-id}][descriptionmarkers]'));
@@ -282,11 +284,16 @@ class gradingform_guide_renderer extends plugin_renderer_base {
                 'id' => '{NAME}-remarklabel{CRITERION-id}'
             );
 
-// TitusLearning - do not show the remarks section - TODO needs to be based on an assignment toggle.
-      //      $remarklabeltext = get_string('criterionremark', 'gradingform_guide', $criterion['shortname']);
-      //      $remarklabel = html_writer::label($remarklabeltext, $remarkid, false, $remarklabelparams);
-      // $criteriontemplate .= html_writer::tag('td', $remarklabel . $input . $commentchooser, array('class' => 'remark'));
-// TitusLearning End of mod - TODO needs to be based on an assignment toggle.
+           // TitusLearning - do not show the remarks section based on assign setting
+           if ( !$this->hideremarks ) {
+           // Endofmod - do not show the remarks section based on assign setting
+              $remarklabeltext = get_string('criterionremark', 'gradingform_guide', $criterion['shortname']);
+              $remarklabel = html_writer::label($remarklabeltext, $remarkid, false, $remarklabelparams);
+              $criteriontemplate .= html_writer::tag('td', $remarklabel . $input . $commentchooser, array('class' => 'remark'));
+            // TitusLearning - do not show the remarks section based on assign setting
+            }
+            // Endofmod - do not show the remarks section based on assign setting
+
 
             // Score input and max score.
             $scoreinputparams = array(

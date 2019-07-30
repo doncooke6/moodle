@@ -999,7 +999,7 @@ class gradingform_guide_instance extends gradingform_instance {
 }
 
 // Additional queries added by TitusLearning for mwabu solution build - Look up the two gradebook customisation settings required
-//                                                                     based on the coursemodule object settings
+//                                                                      based on the coursemodule object settings
 
 /**
  * Returns a class providing the criteria screen customisation options for the specific activity
@@ -1016,6 +1016,6 @@ class gradingform_guide_instance extends gradingform_instance {
                                         WHERE id = :instanceid", $parms);
         $gradebook_options = new stdClass;
         $gradebook_options->hidedesc = $assign->hidegradeinfo;
-        $gradebook_options->hidecriteria = $assign->hidegradecritremarks;
+        $gradebook_options->hideremarks = $assign->hidegradecritremarks;
     return $gradebook_options;
 }
