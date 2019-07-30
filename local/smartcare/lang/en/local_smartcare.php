@@ -36,7 +36,7 @@ $string['all'] = 'All';
 $string['success'] = 'Success';
 $string['error'] = 'Errors';
 $string['producereport'] = 'Run Report';
-
 $string['formatscreen'] = 'Screen';
 $string['formatcsv'] = 'CSV';
 $string['exportformat'] = 'Format';
+$string['smartcarelogreport'] = 'Smartcare log report';

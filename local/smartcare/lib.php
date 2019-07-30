@@ -54,6 +54,20 @@ function local_smartcare_extend_settings_navigation($settingsnav, $context) {
     }
 }
 
+  /**
+   * Add nodes to myprofile page.
+   *
+   * @param \core_user\output\myprofile\tree $tree Tree object
+   * @param stdClass $user user object
+   * @param bool $iscurrentuser
+   * @param stdClass $course Course object
+   */
+  function local_smartcare_myprofile_navigation(core_user\output\myprofile\tree $tree, $user, $iscurrentuser, $course) {
+        $url = new moodle_url('/local/smartcare/admin_log_report.php');
+        $node = new core_user\output\myprofile\node('reports', 'smartcare_log', get_string('smartcarelogreport', 'local_smartcare'), null, $url);
+        $tree->add_node($node);
+}
+
 
 function get_smartcarecourses() {
   return array();
