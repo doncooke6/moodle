@@ -29,7 +29,7 @@
  require_login();
 
  /**
-  * Assignment settings form.
+  * Local plugin for mwabu competency reports
   *
   * @package   mod_assign
   * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
@@ -53,17 +53,27 @@ class local_mwabu_reports_detail_form extends moodleform {
         // Get data dynamically based on the selection from the dropdown.
         $mform = $this->_form;
         $mform->addElement('header', 'proficiency_report', get_string('detail_heading', 'local_mwabu_reports'));
-        $courses = get_mwabucourses();
-        $select = $mform->addElement('select', 'course', get_string('selectcourse', 'local_mwabu_reports'), $courses);
-        $select->setMultiple(false);
-        $quizes = get_mwabuquizzes();
-        $select = $mform->addElement('select', 'quiz', get_string('selectquiz', 'local_mwabu_reports'), $quizes);
+        $designations = get_mwabudesignations(true);
+        $select = $mform->addElement('select', 'role', get_string('selectdesignation', 'local_mwabu_reports'), $designations);
         $select->setMultiple(false);
 
-$mform->addElement('button', 'reporttoscreen', get_string('reporttoscreen', 'local_mwabu_reports'));
-$mform->addElement('button', 'reporttocsv', get_string('reporttocsv', 'local_mwabu_reports'));
+        $facilities = get_mwabufacilities(true);
+        $select = $mform->addElement('select', 'facility', get_string('selectfacility', 'local_mwabu_reports'), $facilities);
 
-        $this->add_action_buttons();
+        $reporttypes = get_mwabureporttype();
+        $select = $mform->addElement('select', 'reporttype', get_string('selectreporttype', 'local_mwabu_reports'), $reporttypes);
+
+        // $quizes = get_mwabuquizzes();
+        // $select = $mform->addElement('select', 'facility', get_string('selectquiz', 'local_mwabu_reports'), $quizes);
+        // $select->setMultiple(false);
+
+        $reportdestination = get_mwabureportoutput();
+        $select = $mform->addElement('select', 'reportdestination', get_string('outputto', 'local_mwabu_reports'), $reportdestination);
+
+        //$mform->addElement('button', 'reporttoscreen', get_string('reporttoscreen', 'local_mwabu_reports'));
+        //$mform->addElement('button', 'reporttocsv', get_string('reporttocsv', 'local_mwabu_reports'));
+
+        $this->add_action_buttons(true, get_string('runreport', 'local_mwabu_reports'));
     }
 
     /**

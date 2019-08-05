@@ -16,7 +16,7 @@
 /**
  * Version information
  *
- * @package    local_smartcare
+ * @package    local_mwabu_reports
  * @copyright 2019 TitusLearning {@link http://www.tituslearning.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

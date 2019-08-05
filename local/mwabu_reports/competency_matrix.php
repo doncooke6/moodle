@@ -13,20 +13,15 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Capability definitions for this module.
+ * Version information
  *
- * @package   mod_assign
- * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    local_mwabu_reports
+ * @copyright 2019 TitusLearning {@link http://www.tituslearning.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$functions = array(
 
-        'local_smartcare_user_log' => array(
-            'classname'     => 'local_smartcare_external',
-            'methodname'    => 'create_smartcare_log_entry',
-            'classpath'     => 'local/smartcare/externallib.php',
-            'description'   => 'WS for smartcare integration.',
-            'type'          => 'write'
-        ) );
+
+//defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
+require_once(__DIR__.'/../../config.php');
+ require_once($CFG->dirroot . '/local/mwabu_reports/lib.php');

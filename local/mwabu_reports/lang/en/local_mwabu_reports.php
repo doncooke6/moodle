@@ -22,16 +22,50 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['name'] = 'Mwabu Project Proficency Reports';
+$string['name'] = 'Mwabu Project Competency Reports';
 $string['pluginname'] = 'Mwabu Reports';
-$string['summary_heading'] = 'Proficiency Tracker Outline Report';
-$string['detail_heading'] = 'Proficiency Tracker Detailed Report';
-$string['admin_heading'] = 'MWABU Proficiency Reporting';
+$string['summary_heading'] = 'Competency Tracker Outline Report';
+$string['detail_heading'] = 'Competency Tracker Detailed Report';
+$string['admin_heading'] = 'MWABU Competency Reporting';
 $string['selectcourse'] = 'Select Course';
 $string['selectquiz'] = 'Select Quiz';
+$string['selectfacility'] = 'Select Facility';
+$string['selectdesignation'] = 'Select Designation';
+$string['selectreporttype'] = 'Select Report Type';
+$string['detailedreport'] = 'Detailed Report';
+$string['summaryreport'] = 'Aggregate Report';
 $string['reporttoscreen'] = 'Run report to the screen';
 $string['reporttocsv'] = 'Export report to csv';
-
 $string['smartcare:admin'] = 'Administer Smartcare Logs';
 $string['proficiency_detail_report_link'] = 'MWABU Proficiency Report Detail';
 $string['proficiency_outline_report_link'] = 'MWABU Proficiency Report Outline';
+
+$string['outputto'] = 'Output to';
+$string['outputtoscreen'] = 'Screen';
+$string['outputtocsv'] = 'CSV';
+$string['all'] = 'All';
+$string['runreport'] = 'Run Report';
+
+// Detail Report
+$string['proficiencytracker'] = 'Proficiency Tracker';
+$string['staffname'] = 'Staff Name';
+$string['id'] = 'ID';
+$string['designation'] = 'Designation';
+$string['facilityname'] = 'Facility Name';
+$string['pretestscore'] = 'Pre Test Score';
+$string['posttestscore'] = 'Post Test Score';
+$string['proficiencytestscore'] = 'Proficiency test Score';
+$string['proficiencyrating'] = 'Proficiency Rating';
+// Aggregate headings
+$string['indicator'] = 'indicator';
+$string['training'] = 'Detailed Report';
+$string['totstafftrained'] = 'Total number of staff trained in period';
+$string['totstaffrequirmentorship'] = 'Number of trained staff requiring mentorship';
+$string['totstaffusingsystempostmentorship'] = 'Number of trained staff using system post training ';
+$string['mentorship'] = 'Mentorship';
+$string['totstaffmentored'] = 'Total number of staff mentored in period';
+$string['totstaffreqtrainained'] = 'Number of staff who did not attend training but were mentored ';
+$string['totstaffreqpostretained'] = 'Number of staff requiring retraining post mentorship';
+$string['totstaffmentorusingsystem'] = 'Number of mentored staff using system post mentorship';
+$string['region'] = 'Region';
+$string['facility'] = 'Facility';

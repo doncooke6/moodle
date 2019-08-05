@@ -24,6 +24,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_smartcare'; // Full name of the plugin (used for diagnostics).
-$plugin->version  = 2019170703;    // The current module version (Date: YYYYMMDDXX).
+$plugin->version  = 2019170708;    // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2015111000;    // Requires this Moodle version.
 $plugin->cron     = 60;

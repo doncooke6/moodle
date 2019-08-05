@@ -24,6 +24,7 @@
  require_once(__DIR__.'/../../config.php');
  require_once($CFG->dirroot.'/local/mwabu_reports/proficiency_tracker_detail_form.php');
  require_once($CFG->dirroot . '/local/mwabu_reports/lib.php');
+ require_once($CFG->dirroot . '/local/mwabu_reports/reportlib.php');
 
 require_login();
 
@@ -49,11 +50,18 @@ if ($mform->is_cancelled()) {
 
 } else if ($fromform = $mform->get_data()) {
     // In this case you process validated data. $mform->get_data() returns data posted in form.
-    //   add_extend_record($fromform->course, $fromform->quiz, $fromform->criteriagrade, $fromform->badgetobeissued);
-    //   header("Location: " . $CFG->wwwroot.'/local/extend_badges/index.php');
 
-    // TODO generate the proficiency tracker detail report
+    if ($fromform->reportdestination == 0) {
+       $format = 'screen';
+     } else {
+       $format = 'csv';
+     }
 
+    if ($fromform->reporttype == 0) {
+       generate_detail_report($format, $fromform->role);
+     } else {
+       generate_outline_report($format);
+     }
 } else {
     // This branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed.
     // Or on the first display of the form.
