@@ -35,7 +35,7 @@
   * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
   * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
   */
-class local_mwabu_reports_detail_form extends moodleform {
+class local_mwabu_reports_outline_form extends moodleform {
     public function __construct() {
         global $CFG;
 
@@ -54,25 +54,31 @@ class local_mwabu_reports_detail_form extends moodleform {
         $mform = $this->_form;
         //$mform->addElement('header', 'proficiency_report', get_string('detail_heading', 'local_mwabu_reports'));
 
+        // $designations = get_mwabudesignations(true);
+        // $select = $mform->addElement('select', 'role', get_string('selectdesignation', 'local_mwabu_reports'), $designations);
+        // $select->setMultiple(false);
+        //
+        $regions = get_regions(true);
+        $select = $mform->addElement('select', 'region', get_string('selectregion', 'local_mwabu_reports'), $regions);
 
-        // users name
-       $mform->addElement('text', 'partusername', get_string('partusername', 'local_mwabu_reports'), array('size'=>'64'));
-       $mform->setType('partusername', PARAM_CLEANHTML);
-        // course name
-       $mform->addElement('text', 'partcoursename', get_string('partcoursename', 'local_mwabu_reports'), array('size'=>'64'));
-       $mform->setType('partcoursename', PARAM_CLEANHTML);
+        $districts = get_districts(true);
+        $select = $mform->addElement('select', 'district', get_string('selectdistrict', 'local_mwabu_reports'), $districts);
 
-        $yesnoopts = yesnoopts();
-        // Completed Training Yes
-        $select = $mform->addElement('select', 'coursecompletion', get_string('coursecompletion', 'local_mwabu_reports'), $yesnoopts);
-        $select->setMultiple(false);
+        $facilities = get_facilities(true);
+        $select = $mform->addElement('select', 'facility', get_string('selectfacility', 'local_mwabu_reports'), $facilities);
 
-        // Require Mentorship
-        $select = $mform->addElement('select', 'requirementorship', get_string('requirementorship', 'local_mwabu_reports'), $yesnoopts);
-        $select->setMultiple(false);
+        $mform->addElement('date_selector', 'outlinefrom', get_string('from'));
+        $mform->addElement('date_selector', 'outlineto', get_string('to'));
+
+        // $quizes = get_mwabuquizzes();
+        // $select = $mform->addElement('select', 'facility', get_string('selectquiz', 'local_mwabu_reports'), $quizes);
+        // $select->setMultiple(false);
 
         $reportdestination = get_mwabureportoutput();
         $select = $mform->addElement('select', 'reportdestination', get_string('outputto', 'local_mwabu_reports'), $reportdestination);
+
+        //$mform->addElement('button', 'reporttoscreen', get_string('reporttoscreen', 'local_mwabu_reports'));
+        //$mform->addElement('button', 'reporttocsv', get_string('reporttocsv', 'local_mwabu_reports'));
 
         $this->add_action_buttons(true, get_string('runreport', 'local_mwabu_reports'));
     }

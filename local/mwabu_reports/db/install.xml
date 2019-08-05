@@ -28,7 +28,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Unique ID for this mwabu advance grading subheading."/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="local_role_prof_matrix" COMMENT="This table saves informationrelating mwabu job titles to proficiencies.">
+    <TABLE NAME="local_role_prof_matrix" COMMENT="This table saves information relating mwabu job titles (designations) to competencies.">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -39,5 +39,22 @@
           <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Unique ID for this mwabu advance grading subheading."/>
         </KEYS>
       </TABLE>
+
+      <TABLE NAME="local_designation_assign" COMMENT="This table saves information relating mwabu job titles  (designations) to proficiency assignments.">
+        <FIELDS>
+          <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+          <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+          <FIELD NAME="assignid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+          <FIELD NAME="designation" TYPE="text"  NOTNULL="true" SEQUENCE="false"/>
+        </FIELDS>
+          <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Unique ID for this mwabu advance grading subheading."/>
+          </KEYS>
+        </TABLE>
+
+
+
+
+
   </TABLES>
   </XMLDB>

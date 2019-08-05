@@ -23,39 +23,57 @@
  */
 
 $string['name'] = 'Mwabu Project Competency Reports';
-$string['pluginname'] = 'Mwabu Reports';
+$string['pluginname'] = 'Mwabu Proficiency Reports';
 $string['summary_heading'] = 'Competency Tracker Outline Report';
 $string['detail_heading'] = 'Competency Tracker Detailed Report';
-$string['admin_heading'] = 'MWABU Competency Reporting';
+$string['admin_heading'] = 'MWABU Reporting';
 $string['selectcourse'] = 'Select Course';
 $string['selectquiz'] = 'Select Quiz';
+$string['selectdistrict'] = 'Select District';
+$string['selectregion'] = 'Select Region';
 $string['selectfacility'] = 'Select Facility';
 $string['selectdesignation'] = 'Select Designation';
 $string['selectreporttype'] = 'Select Report Type';
 $string['detailedreport'] = 'Detailed Report';
 $string['summaryreport'] = 'Aggregate Report';
+$string['competencymatrix'] = 'Competency Report';
 $string['reporttoscreen'] = 'Run report to the screen';
 $string['reporttocsv'] = 'Export report to csv';
 $string['smartcare:admin'] = 'Administer Smartcare Logs';
 $string['proficiency_detail_report_link'] = 'MWABU Proficiency Report Detail';
 $string['proficiency_outline_report_link'] = 'MWABU Proficiency Report Outline';
-
+$string['username'] = 'Partial User Name';
+$string['coursename'] = 'Partial Course Name';
+$string['coursecompletion'] = 'Course Completion';
+$string['requirementorship'] = 'Requires Mentorship';
+$string['coursename'] = 'Partial Course Name';
 $string['outputto'] = 'Output to';
 $string['outputtoscreen'] = 'Screen';
 $string['outputtocsv'] = 'CSV';
 $string['all'] = 'All';
 $string['runreport'] = 'Run Report';
+$string['selectcourse'] = 'Select the course';
+$string['partusername'] = 'Partial User Name';
+$string['partcoursename'] = 'Partial Course Name';
 
 // Detail Report
 $string['proficiencytracker'] = 'Proficiency Tracker';
+$string['snid'] = 'SN ID';
 $string['staffname'] = 'Staff Name';
-$string['id'] = 'ID';
-$string['designation'] = 'Designation';
-$string['facilityname'] = 'Facility Name';
-$string['pretestscore'] = 'Pre Test Score';
-$string['posttestscore'] = 'Post Test Score';
+$string['firstname'] = 'First Name';
+$string['lastname'] = 'Last Name';
+$string['nrc'] = 'National ID (NRC)';
+$string['facility'] = 'Facility';
+$string['district'] = 'District';
+$string['coursename'] = 'Moodle Course Name';
+$string['completed'] = 'Completed Training';
+$string['score'] = 'Proficiency test name';
+$string['proficiencytestname'] = 'Proficiency test name';
+$string['proficiencytestgrade'] = 'Proficiency test grade';
 $string['proficiencytestscore'] = 'Proficiency test Score';
-$string['proficiencyrating'] = 'Proficiency Rating';
+$string['requirementorship'] = 'Require Mentorship';
+$string['certificateissued'] = 'Certificate Issued';
+
 // Aggregate headings
 $string['indicator'] = 'indicator';
 $string['training'] = 'Detailed Report';

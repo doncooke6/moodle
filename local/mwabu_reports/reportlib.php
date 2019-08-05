@@ -22,9 +22,9 @@
  */
  require_once($CFG->dirroot . '/local/mwabu_reports/lib.php');
 
-// report format for administration level auditing of smartcare log
-function generate_outline_report($outputtype = 'screen' , $destignationtype = 'all') {
-    global  $OUTPUT;
+// report format for administration level auditing of smartcare log at course level
+function generate_outline_report($outputtype = 'screen' , $from, $to, $region = 'all', $district = 'all', $facility = 'all') {
+    global  $OUTPUT, $COURSE;
        // base query to  get details for all proficiancy trancking data  for a range
        // add filters to limit output
 
@@ -33,13 +33,18 @@ function generate_outline_report($outputtype = 'screen' , $destignationtype = 'a
 
         echo $OUTPUT->header();
 
-        if ($destignationtype == 'all') {
-            $jobs = get_mwabudesignations();
-             }
-        else {
-            $jobs[0] = $destignationtype;
-        }
+        // if ($destignationtype == 'all') {
+        //     $jobs = get_mwabudesignations();
+        //      }
+        // else {
+        //     $jobs[0] = $destignationtype;
+        // }
 
+// basic population
+// get the users who are enrolled on the course required and are in the :
+// Facility required
+// District required
+// Province required
 
          echo '<table border="1" class="generaltable flexible boxaligncenter">';
          echo '<tr><th width="50%">' . get_string('indicator', 'local_mwabu_reports'). '</th>';
@@ -47,7 +52,7 @@ function generate_outline_report($outputtype = 'screen' , $destignationtype = 'a
          echo '<th>' . get_string('facility', 'local_mwabu_reports'). '</th></tr>';
 
          // a new table for each job role as the competencies will be differant
-         $competenciesforjob = get_competency_per_designation($destignationtype);
+        // $competenciesforjob = get_competency_per_designation($destignationtype);
 
           echo '<tr><th>' . get_string('training', 'local_mwabu_reports') . '</th>';
           echo '<td>0</td><td>0</td><td></td></tr>'; // TODO  totals
@@ -96,104 +101,89 @@ function generate_outline_report($outputtype = 'screen' , $destignationtype = 'a
  }
 
 // Report output for inclusion as a user profile report
-function generate_detail_report($outputtype = 'screen', $destignationtype = 'all') {
+function generate_detail_report($outputtype = 'screen', $partialname, $partialcourse, $reqcoursecomplete, $reqmentor) {
   global $DB, $OUTPUT;
-
 
                    // loop through result set -  push results to csv file or screen display based on output option
                    if ($outputtype == 'screen') {
                      // open csv output file TODO .. possibly as a seperate csv generation php script
-                    if ($destignationtype == 'all') {
-                        $jobs = get_mwabudesignations();
-                         }
-                    else {
-                        $jobs[0] = $destignationtype;
-                    }
+                    // if ($destignationtype == 'all') {
+                    //     $jobs = get_mwabudesignations();
+                    //      }
+                    // else {
+                    //     $jobs[0] = $destignationtype;
+                    // }
 
                      echo $OUTPUT->header();
 
-                     foreach ($jobs as $designation) {
-                          echo 'Designation : ' . $designation . '<br><br>';
-                          echo '<table border=1 class="generaltable flexible boxaligncenter">';
+                    $rows = getDetsForReport($partialname, $partialcourse, $reqcoursecomplete, $reqmentor);
 
-                          // a new table for each job role as the competencies will be differant
-                          $competenciesforjob = get_competency_per_designation($designation);
+                    echo '<table border=1 class="generaltable flexible boxaligncenter">';
 
-                           echo '<tr border="1">';
-                           echo '<th>' . get_string('staffname', 'local_mwabu_reports') . '</th>';
-                           echo '<th>' . get_string('id', 'local_mwabu_reports') . '</th>';
-                           echo '<th>' . get_string('designation', 'local_mwabu_reports') . '</th>';
-                           echo '<th>' . get_string('facilityname', 'local_mwabu_reports') . '</th>';
-                           echo '<th>' . get_string('pretestscore', 'local_mwabu_reports') . '</th>';
-                           echo '<th>' . get_string('posttestscore', 'local_mwabu_reports') . '</th>';
-                           echo '<th>' . get_string('proficiencytestscore', 'local_mwabu_reports') . '</th>';
-                           echo '<th>' . get_string('proficiencyrating', 'local_mwabu_reports') . '</th>';
-
-                          foreach ($competenciesforjob  as $competency) {
-                            echo '<td><div class="rotated-text-container">';
-                            echo '<span id="rotated-text">' . $competency->competencyname . '</span>';
-                            echo '</div></td>';
-                          }
-
+                     echo '<tr border="1">';
+                     echo '<th>' . get_string('snid', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('firstname', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('lastname', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('nrc', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('facilityname', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('districtname', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('coursename', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('completed', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('score', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('proficiencytestname', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('proficiencytestgrade', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('proficiencytestscore', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('requirementorship', 'local_mwabu_reports') . '</th>';
+                     echo '<th>' . get_string('certificateissued', 'local_mwabu_reports') . '</th>';
                      echo '</tr>';
 
 
                      // Each data row
                      echo '<tr>';
-                           $users = get_users_of_designation($designation);
-                           // Include a table with user details plus the competency titles
-                           foreach ($users as $user) { // one row per user
-                                // include firstname and surname for the user
-                                // get competencies for user
+                     // Include a table with user details plus the competency titles
+                     foreach ($rows as $row) { // one row per user
+                          // include firstname and surname for the user
+                          // get competencies for user
+
+                          // get our data for this particular users
+
+                              // We now have the course for this student - so get the course, assignment name and score
+                                  // get the proficiency ratings
+                              $assignname = get_assignment_for_user($row->userid);
+                              $pretestgrade = get_test_grade_for_user($row->quizid, 'quiz', $row->userid);
+                              $posttestgrade = get_test_grade_for_user($courseposttestquiz, 'quiz',$row->userid);
+                              $assignmentgrade = get_test_grade_for_user($courseassignmentid, 'assign', $row->userid);
+                              $profiencyrating =  get_test_grade_for_user($courseproficiiencyratingid, 'assign', $row->userid);
+
                                echo '<tr>';
-                               echo '<td>' . $user->lastname . '</td>' ;
-                               echo '<td>' . get_customuserfield($user->userid,'nrc') . '</td>' ;
-                               echo '<td>' . get_customuserfield($user->userid,'designation') . '</td>' ;
-                               echo '<td>' . get_customuserfield($user->userid,'facility') . '</td>' ;
+                               echo '<td>' . get_customuserfield($row->userid,'snid') . '</td>' ;
+                               echo '<td>' . $row->middlename . '</td>' ;
+                               echo '<td>' . $row->lastname . '</td>' ;
+                               echo '<td>' . get_customuserfield($row->userid,'nrc') . '</td>' ;
+                               echo '<td>' . get_customuserfield($row->userid,'facility') . '</td>' ;
+                               echo '<td>' . get_customuserfield($row->userid,'district') . '</td>' ;
+                               echo '<td>' . $row->coursename . '</td>' ;
 
-                                $usercomps = get_competencies_for_user($user->userid);
+                               // TODO - completed
+                               echo '<td>TODO</td>' ;
 
-                               //For each course/competency match for the role
-                                  foreach ($competenciesforjob as $desigcompetency) {
-                                  // Loop through the competency awards
+                               // - score
+                              echo '<td>' . $assignname . '</td>' ;
+                              echo '<td>' . $assignmentgrade . '</td>' ;
+                              echo '<td>' . $pretestgrade . '</td>' ;
+                              echo '<td>' . $posttestgrade . '</td>' ;
+                              echo '<td>' . $assignmentgrade. '</td>' ;
+                              echo '<td>' . $profiencyrating. '</td>' ;
 
-                                     $foundit = false;
-
-
-                                     // look for whether the user has the competency ?
-                                     foreach ($usercomps as $eachcomp) {
-                                          if ($eachcomp->competencyid == $desigcompetency->competencyid) {
-                                                  $foundit = true;
-
-                                                 // TODO - what details do we want to show - grade/proficiency
-                                                 break;
-
-                                                      // If the user and if given then include the grades
-                                                      // If the competency has not been awarded to the user - leave cell blank
-                                                  } // End of loop
-                                           }
-
-
-
-                                         if ($foundit == true) {
-                                           echo '<td>Gained</td>';
-
-
-
-
-                                         } else {
-                                           echo '<td>Required</td>';
-
-
-                                         }
-                                }
-                     echo '</tr>';
-                            }
+                              // TODO work out if require mentorship
+                              // TODO work out if certificate awarded to user
+                              echo '<td>TODO</td>' ;
+                              echo '<td>TODO</td>' ;
+                              echo '</tr>';
+                          }
 
                             echo '</table>'; // End of competency
-
                             echo $OUTPUT->footer();
-                        }
 
                   } else {
 
@@ -208,7 +198,104 @@ function generate_detail_report($outputtype = 'screen', $destignationtype = 'all
       }
 
 
+function generate_competency_matrix($outputtype = 'screen', $destignationtype = 'all', $course = 0) {
+  // loop through result set -  push results to csv file or screen display based on output option
+  if ($outputtype == 'screen') {
+    // open csv output file TODO .. possibly as a seperate csv generation php script
+   if ($destignationtype == 'all') {
+       $jobs = get_mwabudesignations();
+        }
+   else {
+       $jobs[0] = $destignationtype;
+   }
 
+   echo $OUTPUT->header();
+
+   foreach ($jobs as $designation) {
+
+     foreach ($jobs as $designation) {
+          echo 'Designation : ' . $designation . '<br><br>';
+          echo '<table border=1 class="generaltable flexible boxaligncenter">';
+
+          // a new table for each job role as the competencies will be differant
+          $competenciesforjob = get_competency_per_designation($designation);
+
+     foreach ($competenciesforjob  as $competency) {
+       echo '<td><div class="rotated-text-container">';
+       echo '<span id="rotated-text">' . $competency->competencyname . '</span>';
+       echo '</div></td>';
+     }
+     echo '<td>Full Competency</td>';
+
+     // Each data row
+     echo '<tr>';
+           $users = get_users_of_designation($designation);
+           // Include a table with user details plus the competency titles
+           foreach ($users as $user) { // one row per user
+                // include firstname and surname for the user
+                // get competencies for user
+               echo '<tr>';
+               echo '<td>' . $user->lastname . '</td>' ;
+               echo '<td>' . get_customuserfield($user->userid,'nrc') . '</td>' ;
+               echo '<td>' . get_customuserfield($user->userid,'designation') . '</td>' ;
+               echo '<td>' . get_customuserfield($user->userid,'facility') . '</td>' ;
+
+                $usercomps = get_competencies_for_user($user->userid);
+
+
+                $foundall = true;
+
+                //For each course/competency match for the role
+                   foreach ($competenciesforjob as $desigcompetency) {
+                   // Loop through the competency awards
+
+                      $foundit = false;
+
+
+                      // look for whether the user has the competency ?
+                      foreach ($usercomps as $eachcomp) {
+                           if ($eachcomp->competencyid == $desigcompetency->competencyid) {
+                                   $foundit = true;
+
+                                  // TODO - what details do we want to show - grade/proficiency
+                                  break;
+
+                                       // If the user and if given then include the grades
+                                       // If the competency has not been awarded to the user - leave cell blank
+                                   } // End of loop
+                            }
+
+
+
+                          if ($foundit == true) {
+                            echo '<td>Y</td>';
+
+                          } else {
+                            echo '<td>N</td>';
+                            $foundall = false;
+
+
+                        }
+                    }
+
+
+                    if ($foundall) {
+                        echo '<td>Full</td>';
+                    } else {
+                        echo '<td>Partial</td>';
+                    }
+
+                    echo '</tr>';
+                }
+            }
+        }
+ } else { // csv generation of report
+
+
+
+ }
+
+}
 
 
       function get_competency_per_designation($designation) {
@@ -250,7 +337,7 @@ function generate_detail_report($outputtype = 'screen', $destignationtype = 'all
         $designation_fieldid = $recdec->id;
         $users = array();
 
-         $s = 'SELECT u.id AS userid, firstname, lastname
+         $s = 'SELECT u.id AS userid, firstname, middlename, lastname
                  FROM {user} u
                  JOIN {user_info_data} uid ON uid.fieldid = :designatonid AND uid.userid = u.id
                 WHERE uid.data = :designation';

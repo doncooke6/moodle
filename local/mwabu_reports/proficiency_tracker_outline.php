@@ -22,7 +22,7 @@
  */
 
  require_once(__DIR__.'/../../config.php');
- require_once($CFG->dirroot.'/local/mwabu_reports/proficiency_tracker_detail_form.php');
+ require_once($CFG->dirroot.'/local/mwabu_reports/proficiency_tracker_outline_form.php');
  require_once($CFG->dirroot . '/local/mwabu_reports/lib.php');
  require_once($CFG->dirroot . '/local/mwabu_reports/reportlib.php');
 
@@ -40,7 +40,7 @@ $PAGE->set_title($title);
 $PAGE->set_heading($heading);
 $PAGE->requires->jquery();
 $formparams = new stdClass;
-$mform = new local_mwabu_reports_detail_form();
+$mform = new local_mwabu_reports_outline_form();
 
 // Form processing and displaying is done here.
 if ($mform->is_cancelled()) {
@@ -57,8 +57,7 @@ if ($mform->is_cancelled()) {
        $format = 'csv';
      }
 
-     generate_detail_report($format, $fromform->partusername, $fromform->partcoursename, $fromform->coursecompletion, $fromform->requirementorship);
-
+     generate_outline_report($format, $fromform->outlinefrom, $fromform->outlineto, $fromform->region , $fromform->district, $fromform->facility);
 } else {
     // This branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed.
     // Or on the first display of the form.
